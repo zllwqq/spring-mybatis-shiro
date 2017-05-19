@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- 引入配置文件 -->
+	<properties resource="dbConfig.properties"/>
+	
+	<!-- 数据库驱动 -->
+	<classPathEntry location="${mysql.connector}" />
+
+	<context id="mysqlTables" targetRuntime="MyBatis3">
+		<!-- 关闭注释 -->
+	    <commentGenerator>
+	      <property name="suppressAllComments" value="true" />
+	      <!-- 
+	      <property name="suppressDate" value="true" />
+	       -->
+	    </commentGenerator>
+	
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="${jdbc.driverClass}"
+			connectionURL="${jdbc.url}" 
+			userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		 <!-- 生成实体类的包名和位置，这里配置将生成的实体类放在com.zlstudy.entity这个包下 -->
+		<javaModelGenerator targetPackage="com.github.zllwqq.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<!-- 生成的SQL映射文件包名和位置 -->
+		<sqlMapGenerator targetPackage="mybatis"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		 <!-- 生成DAO的包名和位置，这里配置将生成的dao类放在com.github.zllwqq.mapper这个包下 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.github.zllwqq.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="province" domainObjectName="Province"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+	</context>
+</generatorConfiguration>
